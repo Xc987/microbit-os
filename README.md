@@ -1,10 +1,22 @@
 # Micro:Bit OS
+### How to Use
+Use the A, B, LOGO and P2 as a d-pad to navigate through the menu.
+
+A and B is used for switching to next or previus menu.
+
+In menus LOGO is used to switch to the next submenu. In some scenarios LOGO and P2 is used to incriese or decrease a value.
 
 * Games
     * Space Invaders
     * Flappy Bird
     * Ping Pong
     * Cars game
+    * Dinosaur game
+    * Jumping rope
+    * Pac man
+    * Tetris
+    * Tic Tac Toe
+    * Snake 
 * Tools
 * Turtle
 * Bluetooth
