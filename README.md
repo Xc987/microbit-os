@@ -7,20 +7,40 @@ In menus LOGO is used to switch to the next submenu. In some scenarios LOGO and 
 <details>
     <summary>Games</summary>
      <ul>
-        <li>Space Invaders</li>
-        <li>Flappy Bird</li>
-        <li>Ping Pong</li>
-        <li>Cars game</li>
-        <li>Dinosaur game</li>
-        <li>Jumping rope</li>
-        <li>Pac man</li>
-        <li>Tetris</li>
-        <li>Tic Tac Toe</li>
-        <li>Snake</li>
+        <li>Space Invaders <code>A / B - move horizontaly | AB - shoot</code></li>
+        <li>Flappy Bird <code>A - move down | B - move up</code></li>
+        <li>Ping Pong <code>A / B - move horizontaly</code></li>
+        <li>Cars game <code>A / B - move horizontaly</code></li>
+        <li>Dinosaur game <code>A - jump | B - duck</code></li>
+        <li>Jumping rope <code>A - reset game | B - jump</code></li>
+        <li>Pac man <code>Use accelerometer to move</code></li>
+        <li>Tetris <code>A / B - move block</code></li>
+        <li>Tic Tac Toe <code>AB - start game | A - player 1 | B - player 2</code></li>
+        <li>Snake <code>A - move to the left | B - move to the right</code></li>
       </ul> 
 </details>
 <details>
 <summary>Tools</summary>
+        <ul>
+        <li>Turtle</li>
+      </ul> 
+</details>
+<details>
+<summary>Input</summary>
+    <ul>
+        <li>Temperature</li>
+        <li>Light level</li>
+        <li>Sound level</li>
+        <li>Compass</li>
+        <li>Acceleration X</li>
+        <li>Acceleration Y</li>
+        <li>Acceleration Z</li>
+        <li>Acceleration streanght</li>
+        <li>Magnetic force X</li>
+        <li>Magnetic force Y</li>
+        <li>Magnetic force Z</li>
+        <li>Magnetic force strenght</li>
+      </ul> 
 </details>
 <details>
 <summary>Bluetooth</summary>
@@ -43,10 +63,10 @@ In menus LOGO is used to switch to the next submenu. In some scenarios LOGO and 
 <details>
 <summary>Settings</summary>
    <ul>
-      <li>Enable / Disable music</li>
-      <li>Change music volume (50-255)</li>
-      <li>Change brightness (50-255)</li>
-      <li>Change music output (Built-in/P0)</li>
+      <li>Music <code>LOGO - enable or disable music</code></li>
+      <li>Music volume (50-255) <code>LOGO - increase volume by 50 | P2 - decrease volume by 50</code></li>
+      <li>Brightness (50-255) <code>LOGO - increase brightness by 50 | P2 - decrease volume by 50</code></li>
+      <li>Music output (Built-in/P0) <code>LOGO - use built in speaker or P0</code></li>
    </ul>
 </details>
 

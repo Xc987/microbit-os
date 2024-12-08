@@ -67,10 +67,10 @@ function menu_selection() {
         } else if (menu == 3) {
             images.createImage(`
             . . . . .
-            . . # . .
-            # # # # #
             . # # # .
-            # . # . #
+            . # . # .
+            . # # # .
+            . . . . .
             `).scrollImage(1, scroll_speed)
         } else if (menu == 4) {
             images.createImage(`
@@ -370,6 +370,156 @@ function game_selection() {
         snake()
         getNewDot()
     }
+} // Game selection
+function input_selection() {
+    while (true) {
+        if (submenu == 0) {
+            images.createImage(`
+            . . . . .
+            . # # . #
+            # . . . .
+            # . . . .
+            . # # . .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 1) {
+            images.createImage(`
+            . . . . .
+            . # # # .
+            # . . . #
+            . # . # .
+            . # # # .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 2) {
+            images.createImage(`
+            . . . . .
+            . # . # .
+            . # . . .
+            # # # . .
+            . # . . .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 3) {
+            images.createImage(`
+            . . . . .
+            . . # . .
+            . # # # .
+            # . # . #
+            . . # . .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 4) {
+            images.createImage(`
+            . . . . .
+            . . . . .
+            # . # . .
+            . # . . #
+            # . # . #
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 5) {
+            images.createImage(`
+            . . . . .
+            # . # . .
+            # . # . .
+            . # . . #
+            # # . . #
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 6) {
+            images.createImage(`
+            . . . . .
+            # # # . .
+            . # # . .
+            # . . . #
+            # # # . #
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 7) {
+            images.createImage(`
+            . . . . .
+            . . . . .
+            # # # . .
+            # . # . #
+            # # # . #
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 8) {
+            images.createImage(`
+            . . . . .
+            . . . . #
+            # . # . #
+            . # . . .
+            # . # . .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 9) {
+            images.createImage(`
+            . . . . .
+            # . # . #
+            # # # . #
+            . # . . #
+            # # . . .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 10) {
+            images.createImage(`
+            . . . . .
+            # # # . #
+            . # . . #
+            # . . . .
+            # # # . .
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu == 11) {
+            images.createImage(`
+            . . . . .
+            . . . . #
+            # # # . #
+            # . # . .
+            # # # . .
+            `).scrollImage(1, scroll_speed)
+        }
+        draw_navigation_bar()
+        if (submenu == 0) {
+            led.plot(0, 0)
+        } else if (submenu == 1) {
+            led.plot(1, 0)
+        } else if (submenu == 10) {
+            led.plot(3, 0)
+        } else if (submenu == 11) {
+            led.plot(4, 0)
+        } else {
+            led.plot(2, 0)
+        }
+        if (scroll_speed == 1) {
+            basic.pause(300)
+        }
+        while (true) {
+            if (input.buttonIsPressed(Button.A)) {
+                scroll_speed = 1
+                if (submenu == 0) {
+                    submenu = 11
+                } else {
+                    submenu--
+                }
+                break
+            } else if (input.buttonIsPressed(Button.B)) {
+                if (submenu == 11) {
+                    scroll_speed = 1
+                    submenu = 0
+                } else {
+                    scroll_speed = 35
+                    submenu++
+                }
+                break
+            } else if (input.logoIsPressed()) {
+                break
+            }
+        }
+        clear_navigation_bar()
+        if (input.logoIsPressed()) {
+            break
+        }
+    }
+    if (submenu == 0) {
+        menu_selection()
+    } else if (submenu == 3) {
+        compass_input()
+    } else {
+        
+    }
+    input_mode = submenu
 } // Game selection
 function settings_selection() {
     while (true) {
@@ -747,6 +897,9 @@ let menu = 1
 let submenu = 0
 let scroll_speed = 1
 let game_mode = 0
+let input_mode = 0
+let input_view_mode = 1
+let graph_meter = 1
 // Read flash storage
 let settings_sound = parseFloat(flashstorage.getOrDefault("sound", "0"))
 if (settings_sound == 0) {
@@ -1572,3 +1725,6 @@ function loseGame() {
     basic.showNumber(score_10, 100)
     control.reset()
 } // Snake
+function compass_input() {
+    
+}
