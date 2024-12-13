@@ -11,7 +11,7 @@
         "microbit-pxt-flashstorage": "github:bsiever/microbit-pxt-flashstorage#v0.1.4",
         "microbit-pxt-rotate": "github:bsiever/microbit-pxt-rotate#v0.1.6",
         "dot": "github:Xc987/dot-radioless#939d6039fd88cdd1b407e977c83c083d741589c7",
-        "meter": "https://github.com/Xc987/pxt-meter-extended"
+        "meter": "https://github.com/Xc987/pxt-meter-extended#v1.0"
     },
     "files": [
         "main.ts",
