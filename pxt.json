@@ -3,11 +3,21 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "pxt-blehid": "github:bsiever/microbit-pxt-blehid#v0.1.0",
+        "datalogger": "*",
+        "audio-recording": "*",
+        "pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33",
+        "pxt-flashstorage": "github:bsiever/microbit-pxt-flashstorage#v0.1.4",
+        "pxt-rotate": "github:bsiever/microbit-pxt-rotate#v0.1.6",
+        "pxt-meter-extended": "pkg:meter-extended.json",
+        "pxt-dot-radioless": "pkg:dot.json"
     },
     "files": [
         "main.ts",
-        "README.md"
+        "README.md",
+        "meter-extended.json",
+        "dot.json"
     ],
     "testFiles": [],
     "targetVersions": {
