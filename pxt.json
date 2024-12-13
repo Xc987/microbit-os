@@ -4,13 +4,14 @@
     "dependencies": {
         "core": "*",
         "microphone": "*",
-        "microbit-pxt-blehid - Copy": "github:bsiever/microbit-pxt-blehid#v0.1.0",
+        "microbit-pxt-blehid": "github:bsiever/microbit-pxt-blehid#v0.1.0",
         "datalogger": "*",
         "audio-recording": "*",
         "microbit-pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33",
         "microbit-pxt-flashstorage": "github:bsiever/microbit-pxt-flashstorage#v0.1.4",
         "microbit-pxt-rotate": "github:bsiever/microbit-pxt-rotate#v0.1.6",
-        "dot": "github:Xc987/dot-radioless#939d6039fd88cdd1b407e977c83c083d741589c7"
+        "dot": "github:Xc987/dot-radioless#939d6039fd88cdd1b407e977c83c083d741589c7",
+        "meter": "https://github.com/Xc987/pxt-meter-extended"
     },
     "files": [
         "main.ts",
