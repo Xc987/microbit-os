@@ -22,7 +22,16 @@ In menus LOGO is used to switch to the next submenu. In some scenarios LOGO and 
 <details>
 <summary>Tools</summary>
         <ul>
-        <li>Turtle</li>
+        <li>Turtle <code>A - turn left | B - turn right | AB - pen up / down | LOGO - move forward | P2 - move back</code></li>
+        <li>Audio recorder
+            <ul>   
+                <li>Record audio <code>LOGO - record audio</code></li>
+                <li>Play audio <code>LOGO - play audio</code></li>
+                <li>Sample rate (4400-22000) <code>LOGO - increase sample rate by 4400 | P2 - decrease sample rate by 4400</code></li>
+                <li>Microphone (Low-High) sensitivity <code>LOGO increase sensitivity | P2 - decrease sensitivity</code></li>
+            </ul></li>
+        <li>Calculator</li>
+        <li>Clock</li>
       </ul> 
 </details>
 <details>
