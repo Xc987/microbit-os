@@ -38,13 +38,23 @@ function clear_navigation_bar() {
     led.unplot(3, 0)
     led.unplot(4, 0)
 } // Clear an 5 LED or 3 LED navigation bar at the top
-function silent_input_indicator(){
+function silent_input_indicator() {
     music.setVolume(0)
     record.startRecording(record.BlockingState.Nonblocking)
     basic.pause(25)
     record.playAudio(record.BlockingState.Nonblocking)
     music.stopAllSounds()
-    music.setVolume(255)
+    if (settings_volume == 1) {
+        music.setVolume(50)
+    } else if (settings_volume == 2) {
+        music.setVolume(100)
+    } else if (settings_volume == 3) {
+        music.setVolume(150)
+    } else if (settings_volume == 4) {
+        music.setVolume(200)
+    } else if (settings_volume == 5) {
+        music.setVolume(255)
+    }
 } // Toggle microphone LED on and off
 function plot_graph() {
     if (graph_meter == 1) {
@@ -203,6 +213,7 @@ function menu_selection() {
                 }
                 break
             } else if (input.logoIsPressed()) {
+                scroll_speed = 1
                 break
             }
         }
@@ -211,7 +222,6 @@ function menu_selection() {
             break
         }
     }
-    scroll_speed = 1
     if (menu == 1) {
         game_selection()
     } else if (menu == 2) {
@@ -347,6 +357,7 @@ function game_selection() {
                 }
                 break
             } else if (input.logoIsPressed()) {
+                scroll_speed = 1
                 break
             }
         }
@@ -493,6 +504,7 @@ function tool_selection() {
                 }
                 break
             } else if (input.logoIsPressed()) {
+                scroll_speed = 1
                 break
             }
         }
@@ -503,10 +515,12 @@ function tool_selection() {
     }
     if (submenu == 0) {
         menu_selection()
-    } if (submenu == 1) {
+    } else if (submenu == 1) {
         turtle()
+    } else if (submenu == 2) {
+        recorder_selection()
     }
-} // Game selection
+} // Tool selection
 function input_selection() {
     while (true) {
         if (submenu == 0) {
@@ -648,6 +662,7 @@ function input_selection() {
                 }
                 break
             } else if (input.logoIsPressed()) {
+                scroll_speed = 1
                 break
             }
         }
@@ -790,7 +805,6 @@ function settings_selection() {
                 }
 
             } else {
-                music.setVolume(255)
                 images.createImage(`
                 . . . . .
                 . . # . .
@@ -900,54 +914,59 @@ function settings_selection() {
                 }
                 break
             } else if (input.logoIsPressed()) {
+                scroll_speed = 1
+                if (submenu == 1) {
+                    if (settings_sound == 0) {
+                        if (settings_soundoutput == 1) {
+                            music.setBuiltInSpeakerEnabled(true)
+                            pins.setAudioPinEnabled(false)
+                        } else {
+                            music.setBuiltInSpeakerEnabled(false)
+                            pins.setAudioPinEnabled(true)
+                        }
+                        settings_sound = 1
+                    } else {
+                        music.setBuiltInSpeakerEnabled(false)
+                        pins.setAudioPinEnabled(false)
+                        settings_sound = 0
+                    }
+                    flashstorage.put("sound", convertToText(settings_sound))
+                } else if (submenu == 2) {
+                    if (settings_volume == 5) {
+                        settings_volume = 1
+                    } else {
+                        settings_volume++
+                    }
+                    flashstorage.put("volume", convertToText(settings_volume))
+                } else if (submenu == 3) {
+                    if (settings_brightness == 5) {
+                        settings_brightness = 1
+                    } else {
+                        settings_brightness++
+                    }
+                    flashstorage.put("brightness", convertToText(settings_brightness))
+                } else if (submenu == 4) {
+                    if (settings_soundoutput == 1) {
+                        music.setBuiltInSpeakerEnabled(false)
+                        pins.setAudioPinEnabled(true)
+                        settings_soundoutput = 2
+                    } else {
+                        if (settings_sound == 0) {
+                            music.setBuiltInSpeakerEnabled(false)
+                            pins.setAudioPinEnabled(false)
+                        } else {
+                            music.setBuiltInSpeakerEnabled(true)
+                            pins.setAudioPinEnabled(false)
+                        }
+                        settings_soundoutput = 1
+                    }
+                    flashstorage.put("soundoutput", convertToText(settings_soundoutput))
+                }
                 break
             }
         }
         clear_navigation_bar()
         if (input.logoIsPressed()) {
-            scroll_speed = 1
-            if (submenu == 1) {
-                if (settings_sound == 0) {
-                    if (settings_soundoutput == 1) {
-                        music.setBuiltInSpeakerEnabled(true)
-                        pins.setAudioPinEnabled(false)
-                    } else {
-                        music.setBuiltInSpeakerEnabled(false)
-                        pins.setAudioPinEnabled(true)
-                    }
-                    settings_sound = 1
-                } else {
-                    music.setBuiltInSpeakerEnabled(false)
-                    pins.setAudioPinEnabled(false)
-                    settings_sound = 0
-                }
-                flashstorage.put("sound", convertToText(settings_sound))
-            } else if (submenu == 2) {
-                if (settings_volume == 5) {
-                    settings_volume = 1
-                } else {
-                    settings_volume++
-                }
-                flashstorage.put("volume", convertToText(settings_volume))
-            } else if (submenu == 3) {
-                if (settings_brightness == 5) {
-                    settings_brightness = 1
-                } else {
-                    settings_brightness++
-                }
-                flashstorage.put("brightness", convertToText(settings_brightness))
-            } else if (submenu == 4) {
-                if (settings_soundoutput == 1) {
-                    music.setBuiltInSpeakerEnabled(false)
-                    pins.setAudioPinEnabled(true)
-                    settings_soundoutput = 2
-                } else {
-                    music.setBuiltInSpeakerEnabled(true)
-                    pins.setAudioPinEnabled(false)
-                    settings_soundoutput = 1
-                }
-                flashstorage.put("soundoutput", convertToText(settings_soundoutput))
-            }
             if (submenu == 0) {
                 break
             }
@@ -1109,6 +1128,7 @@ pins.setAudioPin(DigitalPin.P0)
 // System variables
 let menu = 1
 let submenu = 0
+let submenu2 = 0
 let scroll_speed = 1
 let game_mode = 0
 let input_view_mode = 1
@@ -1125,6 +1145,7 @@ if (settings_sound == 0) {
     pins.setAudioPinEnabled(true)
 }
 let settings_volume = parseFloat(flashstorage.getOrDefault("volume", "5"))
+basic.showNumber(settings_volume)
 if (settings_volume == 1) {
     music.setVolume(50)
 } else if (settings_volume == 2) {
@@ -1157,6 +1178,19 @@ if (settings_sound == 1) {
         music.setBuiltInSpeakerEnabled(false)
         pins.setAudioPinEnabled(true)
     }
+} else {
+    music.setBuiltInSpeakerEnabled(false)
+    pins.setAudioPinEnabled(false)
+    basic.showNumber(5)
+}
+let settings_samplerate = parseFloat(flashstorage.getOrDefault("samplerate", "5"))
+let settings_micgain = parseFloat(flashstorage.getOrDefault("micgain", "1"))
+if (settings_micgain == 1) {
+    record.setMicGain(record.AudioLevels.Low)
+} else if (settings_micgain == 2) {
+    record.setMicGain(record.AudioLevels.Medium)
+} else if (settings_micgain == 3) {
+    record.setMicGain(record.AudioLevels.High)
 }
 let graph_meter = parseFloat(flashstorage.getOrDefault("graph", "1"))
 // Game specific variables // [NAME]_[GAME_NUMBER]
@@ -2007,3 +2041,154 @@ function turtle() {
         basic.pause(150)
     }
 } // Turle
+function recorder_selection() {
+    record.setSampleRate(4400 * settings_samplerate)
+    while (true) {
+        if (submenu2 == 0) {
+            images.createImage(`
+            . . . . .
+            . # . . .
+            # # # # #
+            . # . . #
+            . . . # #
+            `).scrollImage(1, scroll_speed)
+        } else if (submenu2 == 1) {
+            images.createImage(`
+            . . . . .
+            . # . # .
+            . # . . .
+            # # # . .
+            . # . . .
+                `).scrollImage(1, scroll_speed)
+        } else if (submenu2 == 2) {
+            images.createImage(`
+            . . . . .
+            . . # # .
+            . . # . #
+            # # # . .
+            # # # . .
+                `).scrollImage(1, scroll_speed)
+        } else if (submenu2 == 3) {
+            if (settings_samplerate < 5) {
+                images.createImage(`
+                . . . . .
+                . . . . .
+                # . . . .
+                # . . . .
+                . . . . .
+                `).scrollImage(1, scroll_speed)
+                if (settings_samplerate >= 1) {
+                    led.plotBrightness(2, 1, 50)
+                }
+                if (settings_samplerate >= 2) {
+                    led.plotBrightness(3, 2, 50)
+                }
+                if (settings_samplerate >= 3) {
+                    led.plotBrightness(3, 3, 50)
+                }
+                if (settings_samplerate >= 4) {
+                    led.plotBrightness(2, 4, 50)
+                }
+
+            } else {
+                images.createImage(`
+                . . . . .
+                . . # . .
+                # . . # .
+                # . . # .
+                . . # . .
+                `).scrollImage(1, scroll_speed)
+            }
+        } else if (submenu2 == 4) {
+            images.createImage(`
+            . . . . .
+            . # . # .
+            . # . . .
+            # # # . .
+            . # . . .
+            `).scrollImage(1, scroll_speed)
+            if (settings_micgain >= 1) {
+                led.plot(4,4)
+                record.setMicGain(record.AudioLevels.Low)
+            }
+            if (settings_micgain >= 2) {
+                led.plot(4, 3)
+                record.setMicGain(record.AudioLevels.Medium)
+            }
+            if (settings_micgain >= 3) {
+                led.plot(4, 2)
+                record.setMicGain(record.AudioLevels.High)
+            }
+        }
+        draw_navigation_bar()
+        if (submenu2 == 0) {
+            led.plot(0, 0)
+        } else if (submenu2 == 1) {
+            led.plot(1, 0)
+        } else if (submenu2 == 3) {
+            led.plot(3, 0)
+        } else if (submenu2 == 4) {
+            led.plot(4, 0)
+        } else {
+            led.plot(2, 0)
+        }
+        if (scroll_speed == 1) {
+            basic.pause(300)
+        }
+        while (true) {
+            if (input.buttonIsPressed(Button.A)) {
+                scroll_speed = 1
+                if (submenu2 == 0) {
+                    submenu2 = 4
+                } else {
+                    submenu2--
+                }
+                break
+            } else if (input.buttonIsPressed(Button.B)) {
+                if (submenu2 == 4) {
+                    scroll_speed = 1
+                    submenu2 = 0
+                } else {
+                    scroll_speed = 35
+                    submenu2++
+                }
+                break
+            } else if (input.logoIsPressed()) {
+                scroll_speed = 1
+                if (submenu2 == 1) {
+                    record.startRecording(record.BlockingState.Nonblocking)
+                    basic.clearScreen()
+                    while (record.audioStatus(record.AudioStatus.Recording)) {
+                        loading()
+                    }
+                } else if (submenu2 == 2) {
+                    record.playAudio(record.BlockingState.Nonblocking)
+                    basic.clearScreen()
+                    while (record.audioStatus(record.AudioStatus.Playing)) {
+                        loading()
+                    }
+                } else if (submenu2 == 3) {
+                    if (settings_samplerate == 5) {
+                        settings_samplerate = 1
+                    } else {
+                        settings_samplerate++
+                    }
+                    record.setSampleRate(4400 * settings_samplerate)
+                    flashstorage.put("samplerate", convertToText(settings_samplerate))
+                } else if (submenu2 == 4) {
+                    if (settings_micgain == 3) {
+                        settings_micgain = 1
+                    } else {
+                        settings_micgain++
+                    }
+                    flashstorage.put("micgain", convertToText(settings_micgain))
+                }
+                break
+            }
+        }
+        clear_navigation_bar()
+    }
+    if (submenu == 0) {
+        tool_selection()
+    }
+} // Audio recorder selection
